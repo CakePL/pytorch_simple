@@ -1,0 +1,17 @@
+importances: x_1 >= x_2 >= ... >= x_n
+             x_1 + ... + x_n = 1
+	    
+define t_n := n * x_n
+       t_k := k * (x_k - x_(k+1))
+
+then t_1 + ... + t_n = 1
+
+one epoch:
+	for k = n to 1
+		optimize params 1, 2, ..., k for time t_k
+		
+then every param k is effectively being optimized for time x_k (for x_1 == x_2 == ... == x_n we get standard optimizer)
+
+advanced option: take p >= 0, at the beginning raise x_1, x_2, ..., x_n to power p and scale so that they sum up to 1
+(eg. p := 1 makes no effect, for p := 0 we get standard optimizer, for p := +inf we would get only one parameter optimized)
+	
